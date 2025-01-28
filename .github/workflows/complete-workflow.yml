@@ -15,12 +15,11 @@ jobs:
     - name: Build with dotnet
       run: dotnet build --configuration Release
     - name: dotnet-sonarscanner
-      uses: spoland/dotnet-sonarcloud-analysis@v4.0
+      uses: chill-viking/dotnet-sonar-scanner@v2
       with:
-        project-key: dotnetgithubactionsproject
+        sonar-project-key: dotnetgithubactionsproject
         sonar-host-url: https://sonarcloud.io
-        sonar-organization: dotnetgithubactionsorg
-        opencover-reports-paths: "**/*.opencover.xml"
+        sonar-org-key: dotnetgithubactionsorg
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
