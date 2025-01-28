@@ -12,8 +12,8 @@ jobs:
       with:
         dotnet-version: 3.0.100
     # dotnet build and publish
-    - name: Build with dotnet
-      run: dotnet build --configuration Release
+    # - name: Build with dotnet
+    #   run: dotnet build --configuration Release
     - name: dotnet-sonarscanner
       uses: chill-viking/dotnet-sonar-scanner@v2
       with:
