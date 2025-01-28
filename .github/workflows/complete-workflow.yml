@@ -6,20 +6,20 @@ jobs:
     runs-on: ubuntu-latest
     name: Run unit tests and SAST scan on the source code 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 3.0.100
     # dotnet build and publish
     - name: Build with dotnet
       run: dotnet build --configuration Release
     - name: dotnet-sonarscanner
-      uses: spoland/dotnet-sonarcloud-analysis@v1.0
+      uses: spoland/dotnet-sonarcloud-analysis@v4.0
       with:
-        project-key: javaprojectreachability
+        project-key: dotnetgithubactionsproject
         sonar-host-url: https://sonarcloud.io
-        sonar-organization: javaprojectreachability
+        sonar-organization: dotnetgithubactionsorg
         opencover-reports-paths: "**/*.opencover.xml"
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -41,13 +41,12 @@ jobs:
     name: Run DAST scan on the web application
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           ref: master
       - name: ZAP Scan
-        uses: zaproxy/action-baseline@v0.6.1
+        uses: zaproxy/action-baseline@v0.14.0
         with:
-          docker_name: 'owasp/zap2docker-stable'
           target: 'http://testphp.vulnweb.com/'
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a'
